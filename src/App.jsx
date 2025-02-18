@@ -1,5 +1,15 @@
 import { useState } from 'react';
 
+// Nappikomponentti palautteen antamiseen
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>{text}</button>
+);
+
+// Tilastorivi-komponentti
+const StatisticLine = ({ text, value }) => (
+  <p>{text}: {value}</p>
+);
+
 // Tilastojen näyttämisestä vastaava komponentti
 const Statistics = ({ hyvä, neutraali, huono }) => {
   const yhteensä = hyvä + neutraali + huono;
@@ -14,12 +24,12 @@ const Statistics = ({ hyvä, neutraali, huono }) => {
   return (
     <div>
       <h2>Tilastot</h2>
-      <p>Hyvä: {hyvä}</p>
-      <p>Neutraali: {neutraali}</p>
-      <p>Huono: {huono}</p>
-      <p>Kaikki: {yhteensä}</p>
-      <p>Keskiarvo: {keskiarvo.toFixed(1)}</p>
-      <p>Positiivisia: {positiivisia.toFixed(1)}%</p>
+      <StatisticLine text="Hyvä" value={hyvä} />
+      <StatisticLine text="Neutraali" value={neutraali} />
+      <StatisticLine text="Huono" value={huono} />
+      <StatisticLine text="Kaikki" value={yhteensä} />
+      <StatisticLine text="Keskiarvo" value={keskiarvo.toFixed(1)} />
+      <StatisticLine text="Positiivisia" value={`${positiivisia.toFixed(1)}%`} />
     </div>
   );
 };
@@ -32,11 +42,10 @@ const App = () => {
   return (
     <div>
       <h1>Anna palautetta</h1>
-      <button onClick={() => setHyvä(hyvä + 1)}>Hyvä</button>
-      <button onClick={() => setNeutraali(neutraali + 1)}>Neutraali</button>
-      <button onClick={() => setHuono(huono + 1)}>Huono</button>
+      <Button handleClick={() => setHyvä(hyvä + 1)} text="Hyvä" />
+      <Button handleClick={() => setNeutraali(neutraali + 1)} text="Neutraali" />
+      <Button handleClick={() => setHuono(huono + 1)} text="Huono" />
 
-      {/* Tilastot erillisen komponentin kautta */}
       <Statistics hyvä={hyvä} neutraali={neutraali} huono={huono} />
     </div>
   );
