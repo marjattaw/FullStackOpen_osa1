@@ -5,9 +5,12 @@ const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>{text}</button>
 );
 
-// Tilastorivi-komponentti
+// Tilastorivi-komponentti (nyt taulukon rivinä)
 const StatisticLine = ({ text, value }) => (
-  <p>{text}: {value}</p>
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
 );
 
 // Tilastojen näyttämisestä vastaava komponentti
@@ -24,12 +27,16 @@ const Statistics = ({ hyvä, neutraali, huono }) => {
   return (
     <div>
       <h2>Tilastot</h2>
-      <StatisticLine text="Hyvä" value={hyvä} />
-      <StatisticLine text="Neutraali" value={neutraali} />
-      <StatisticLine text="Huono" value={huono} />
-      <StatisticLine text="Kaikki" value={yhteensä} />
-      <StatisticLine text="Keskiarvo" value={keskiarvo.toFixed(1)} />
-      <StatisticLine text="Positiivisia" value={`${positiivisia.toFixed(1)}%`} />
+      <table>
+        <tbody>
+          <StatisticLine text="Hyvä" value={hyvä} />
+          <StatisticLine text="Neutraali" value={neutraali} />
+          <StatisticLine text="Huono" value={huono} />
+          <StatisticLine text="Kaikki" value={yhteensä} />
+          <StatisticLine text="Keskiarvo" value={keskiarvo.toFixed(1)} />
+          <StatisticLine text="Positiivisia" value={`${positiivisia.toFixed(1)}%`} />
+        </tbody>
+      </table>
     </div>
   );
 };
