@@ -1,25 +1,31 @@
-const App = () => {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
+import { useState } from 'react';
 
-  const total = good + neutral + bad;
-  const average = total === 0 ? 0 : (good - bad) / total;
-  const positivePercentage = total === 0 ? 0 : (good / total) * 100;
+const App = () => {
+  const [hyvä, setHyvä] = useState(0);
+  const [neutraali, setNeutraali] = useState(0);
+  const [huono, setHuono] = useState(0);
+
+  // Lasketaan tilastot
+  const yhteensä = hyvä + neutraali + huono;
+  const keskiarvo = yhteensä === 0 ? 0 : (hyvä - huono) / yhteensä;
+  const positiivisia = yhteensä === 0 ? 0 : (hyvä / yhteensä) * 100;
 
   return (
     <div>
       <h1>Anna palautetta</h1>
-      <button onClick={() => setGood(good + 1)}>Hyvä</button>
-      <button onClick={() => setNeutral(neutral + 1)}>Neutraali</button>
-      <button onClick={() => setBad(bad + 1)}>Huono</button>
-      <h2>Statistiikka</h2>
-      <p>Hyvä: {good}</p>
-      <p>Neutraali: {neutral}</p>
-      <p>Huono: {bad}</p>
-      <p>Kaikki: {total}</p>
-      <p>Keskiarvo: {average.toFixed(1)}</p>
-      <p>Positiiviset: {positivePercentage.toFixed(1)}%</p>
+      <button onClick={() => setHyvä(hyvä + 1)}>Hyvä</button>
+      <button onClick={() => setNeutraali(neutraali + 1)}>Neutraali</button>
+      <button onClick={() => setHuono(huono + 1)}>Huono</button>
+
+      <h2>Tilastot</h2>
+      <p>Hyvä: {hyvä}</p>
+      <p>Neutraali: {neutraali}</p>
+      <p>Huono: {huono}</p>
+      <p>Kaikki: {yhteensä}</p>
+      <p>Keskiarvo: {keskiarvo.toFixed(1)}</p>
+      <p>Positiivisia: {positiivisia.toFixed(1)}%</p>
     </div>
   );
 };
+
+export default App;
