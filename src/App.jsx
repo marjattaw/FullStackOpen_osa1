@@ -3,8 +3,13 @@ import { useState } from 'react';
 // Tilastojen näyttämisestä vastaava komponentti
 const Statistics = ({ hyvä, neutraali, huono }) => {
   const yhteensä = hyvä + neutraali + huono;
-  const keskiarvo = yhteensä === 0 ? 0 : (hyvä - huono) / yhteensä;
-  const positiivisia = yhteensä === 0 ? 0 : (hyvä / yhteensä) * 100;
+
+  if (yhteensä === 0) {
+    return <p>Ei yhtään palautetta annettu</p>;
+  }
+
+  const keskiarvo = (hyvä - huono) / yhteensä;
+  const positiivisia = (hyvä / yhteensä) * 100;
 
   return (
     <div>
