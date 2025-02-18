@@ -1,59 +1,30 @@
 import { useState } from 'react';
 
-// Nappikomponentti palautteen antamiseen
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>{text}</button>
-);
-
-// Tilastorivi-komponentti (nyt taulukon rivinä)
-const StatisticLine = ({ text, value }) => (
-  <tr>
-    <td>{text}</td>
-    <td>{value}</td>
-  </tr>
-);
-
-// Tilastojen näyttämisestä vastaava komponentti
-const Statistics = ({ hyvä, neutraali, huono }) => {
-  const yhteensä = hyvä + neutraali + huono;
-
-  if (yhteensä === 0) {
-    return <p>Ei yhtään palautetta annettu</p>;
-  }
-
-  const keskiarvo = (hyvä - huono) / yhteensä;
-  const positiivisia = (hyvä / yhteensä) * 100;
-
-  return (
-    <div>
-      <h2>Tilastot</h2>
-      <table>
-        <tbody>
-          <StatisticLine text="Hyvä" value={hyvä} />
-          <StatisticLine text="Neutraali" value={neutraali} />
-          <StatisticLine text="Huono" value={huono} />
-          <StatisticLine text="Kaikki" value={yhteensä} />
-          <StatisticLine text="Keskiarvo" value={keskiarvo.toFixed(1)} />
-          <StatisticLine text="Positiivisia" value={`${positiivisia.toFixed(1)}%`} />
-        </tbody>
-      </table>
-    </div>
-  );
-};
+// Anekdootit-taulukko
+const anekdootit = [
+  'Jos se sattuu, tee se useammin.',
+  'Lisäämällä työvoimaa myöhässä olevaan projektiin saadaan se vielä enemmän myöhästymään.',
+  'Ensimmäiset 90 % koodista vie ensimmäiset 90 % kehitysajasta... Loput 10 % vie toiset 90 % ajasta.',
+  'Kuka tahansa osaa kirjoittaa koodia, jota tietokone ymmärtää. Hyvät ohjelmoijat kirjoittavat koodia, jota ihmiset ymmärtävät.',
+  'Ennenaikainen optimointi on kaiken pahan alku ja juuri.',
+  'Debuggaus on kaksi kertaa vaikeampaa kuin koodin kirjoittaminen. Jos siis kirjoitat koodin mahdollisimman fiksusti, et ole tarpeeksi fiksu sitä debuggaamaan.',
+  'Ohjelmointi ilman console.log:n raskasta käyttöä on kuin lääkäri ilman röntgeniä tai verikokeita.',
+  'Ainoa tapa mennä nopeasti on tehdä asiat hyvin.'
+];
 
 const App = () => {
-  const [hyvä, setHyvä] = useState(0);
-  const [neutraali, setNeutraali] = useState(0);
-  const [huono, setHuono] = useState(0);
+  const [valittu, setValittu] = useState(0);
+
+  const uusiSatunnainen = () => {
+    const satunnainen = Math.floor(Math.random() * anekdootit.length);
+    setValittu(satunnainen);
+  };
 
   return (
     <div>
-      <h1>Anna palautetta</h1>
-      <Button handleClick={() => setHyvä(hyvä + 1)} text="Hyvä" />
-      <Button handleClick={() => setNeutraali(neutraali + 1)} text="Neutraali" />
-      <Button handleClick={() => setHuono(huono + 1)} text="Huono" />
-
-      <Statistics hyvä={hyvä} neutraali={neutraali} huono={huono} />
+      <h1>Päivän anekdootti</h1>
+      <p>{anekdootit[valittu]}</p>
+      <button onClick={uusiSatunnainen}>Seuraava anekdootti</button>
     </div>
   );
 };
