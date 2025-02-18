@@ -29,6 +29,9 @@ const App = () => {
     setÄänet(kopio);
   };
 
+  // Etsi anekdootti, jolla on eniten ääniä
+  const enitenÄänestettyIndeksi = äänet.indexOf(Math.max(...äänet));
+
   return (
     <div>
       <h1>Päivän anekdootti</h1>
@@ -36,6 +39,16 @@ const App = () => {
       <p>Äänet: {äänet[valittu]}</p>
       <button onClick={äänestä}>Äänestä</button>
       <button onClick={uusiSatunnainen}>Seuraava anekdootti</button>
+
+      <h2>Eniten ääniä saanut anekdootti</h2>
+      {äänet[enitenÄänestettyIndeksi] > 0 ? (
+        <div>
+          <p>{anekdootit[enitenÄänestettyIndeksi]}</p>
+          <p>Äänet: {äänet[enitenÄänestettyIndeksi]}</p>
+        </div>
+      ) : (
+        <p>Yhtään ääntä ei ole vielä annettu.</p>
+      )}
     </div>
   );
 };
