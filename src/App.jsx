@@ -14,16 +14,27 @@ const anekdootit = [
 
 const App = () => {
   const [valittu, setValittu] = useState(0);
+  const [äänet, setÄänet] = useState(new Array(anekdootit.length).fill(0));
 
+  // Valitse satunnainen anekdootti
   const uusiSatunnainen = () => {
     const satunnainen = Math.floor(Math.random() * anekdootit.length);
     setValittu(satunnainen);
+  };
+
+  // Lisää ääni valitulle anekdootille
+  const äänestä = () => {
+    const kopio = [...äänet];
+    kopio[valittu] += 1;
+    setÄänet(kopio);
   };
 
   return (
     <div>
       <h1>Päivän anekdootti</h1>
       <p>{anekdootit[valittu]}</p>
+      <p>Äänet: {äänet[valittu]}</p>
+      <button onClick={äänestä}>Äänestä</button>
       <button onClick={uusiSatunnainen}>Seuraava anekdootti</button>
     </div>
   );
